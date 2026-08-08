@@ -2,11 +2,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import { projectsData } from "../../data/projects";
-
+import Footer from "@/componnents/Footer";
 export default function ProjectsPage() {
   return (
     <main className="min-h-screen bg-[#f6f8fb] text-[#131b2e]">
-      <section className="mx-auto max-w-7xl px-5 py-16 sm:py-24">
+      <section className="mx-auto max-w-7xl px-5 pt-16 sm:py-24">
         <Link
           href="/"
           className="inline-flex items-center gap-2 rounded-full border border-[#4b40e0] px-4 py-2 text-sm font-medium text-[#4b40e0] transition hover:bg-[#4b40e0] hover:text-white"
@@ -78,6 +78,7 @@ export default function ProjectsPage() {
           ))}
         </div>
       </section>
+      <Footer/>
     </main>
   );
 }

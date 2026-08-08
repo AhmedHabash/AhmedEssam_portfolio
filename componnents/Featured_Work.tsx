@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { ExternalLink } from "lucide-react";
 import { motion } from "framer-motion";
@@ -29,6 +30,17 @@ interface FeaturedWorkProps {
 }
 
 function Featured_Work({ projects }: FeaturedWorkProps) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkViewport = () => setIsMobile(window.innerWidth < 768);
+
+    checkViewport();
+    window.addEventListener("resize", checkViewport);
+
+    return () => window.removeEventListener("resize", checkViewport);
+  }, []);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -50,21 +62,21 @@ function Featured_Work({ projects }: FeaturedWorkProps) {
   };
 
   return (
-    <section id="projects" className="w-full bg-[#f6f8fb] py-24">
-      <div className="mx-auto max-w-7xl px-5">
+    <section id="projects" className="w-full bg-[#f6f8fb] py-16 sm:py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-5">
         {/* Heading */}
         <motion.div
           className="mb-16 text-center"
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          initial={isMobile ? false : { opacity: 0, y: -20 }}
+          whileInView={isMobile ? undefined : { opacity: 1, y: 0 }}
+          viewport={isMobile ? undefined : { once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className="text-4xl font-bold text-[#191c1e]">
+          <h1 className="text-3xl font-bold text-[#191c1e] sm:text-4xl">
             Featured Projects
           </h1>
 
-          <p className="mx-auto mt-5 max-w-2xl text-gray-500">
+          <p className="mx-auto mt-4 max-w-2xl text-sm text-gray-500 sm:mt-5 sm:text-base">
             A curated selection of my best work showcasing responsive design,
             clean architecture, and modern web technologies.
           </p>
@@ -72,17 +84,20 @@ function Featured_Work({ projects }: FeaturedWorkProps) {
 
         {/* Cards */}
         <motion.div
-          className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
+          className="grid gap-5 sm:gap-8 sm:grid-cols-2 lg:grid-cols-3"
           variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+          initial={isMobile ? false : "hidden"}
+          whileInView={isMobile ? undefined : "visible"}
+          viewport={isMobile ? undefined : { once: true, amount: 0.2 }}
         >
           {projects.map((project, index) => (
             <motion.div
               key={index}
               variants={cardVariants}
-              className="group overflow-hidden rounded-2xl bg-white shadow-lg transition-all duration-300 hover:-translate-y-3 hover:shadow-2xl"
+              initial={isMobile ? false : "hidden"}
+              whileInView={isMobile ? undefined : "visible"}
+              viewport={isMobile ? undefined : { once: true, amount: 0.2 }}
+              className="group w-full overflow-hidden rounded-2xl bg-white shadow-lg transition-all duration-300 hover:-translate-y-3 hover:shadow-2xl"
               whileHover={{ y: -12 }}
             >
               {/* Image */}
@@ -108,19 +123,21 @@ function Featured_Work({ projects }: FeaturedWorkProps) {
               </div>
 
               {/* Content */}
-              <div className="p-6">
-                <h2 className="text-xl font-semibold transition-colors duration-300 group-hover:text-[#4b40e0]">
+              <div className="p-5 sm:p-6">
+                <h2 className="text-lg font-semibold transition-colors duration-300 group-hover:text-[#4b40e0] sm:text-xl">
                   {project.title}
                 </h2>
 
-                <p className="mt-3 text-sm  text-gray-500">{project.des}</p>
+                <p className="mt-3 text-sm leading-6 text-gray-500">
+                  {project.des}
+                </p>
 
                 {/* Tech */}
-                <div className="mt-5 flex flex-wrap gap-2">
+                <div className="mt-4 flex flex-wrap gap-2 sm:mt-5">
                   {project.tech.map((tech) => (
                     <span
                       key={tech}
-                      className="rounded-full bg-indigo-100 px-3 py-1 text-xs font-medium text-[#4b40e0]"
+                      className="rounded-full bg-indigo-100 px-2.5 py-1 text-[11px] font-medium text-[#4b40e0] sm:px-3 sm:text-xs"
                     >
                       {tech}
                     </span>
@@ -128,12 +145,12 @@ function Featured_Work({ projects }: FeaturedWorkProps) {
                 </div>
 
                 {/* Buttons */}
-                <div className="mt-6 flex items-center justify-between">
+                <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                   <a
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-gray-600 transition hover:text-black"
+                    className="flex items-center justify-center gap-2 text-gray-600 transition hover:text-black sm:justify-start"
                   >
                     <GithubIcon size={16} />
                     GitHub
@@ -143,7 +160,7 @@ function Featured_Work({ projects }: FeaturedWorkProps) {
                     href={project.live}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 rounded-lg bg-[#4b40e0] px-5 py-2 text-white transition hover:bg-[#372dc4]"
+                    className="flex items-center justify-center gap-2 rounded-lg bg-[#4b40e0] px-5 py-2 text-white transition hover:bg-[#372dc4]"
                   >
                     Live Demo
                     <ExternalLink size={16} />

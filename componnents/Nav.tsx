@@ -4,15 +4,11 @@ import Link from "next/link";
 import { CodeXml, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
+import { ulData } from "@/data/navdata";
 function Nav() {
   const [activePage, setActivePage] = useState("home");
 
-  const ulData = [
-    { title: "Home", link: "/?page=home", key: "home" },
-    { title: "About", link: "/about?page=about", key: "about" },
-    { title: "Projects", link: "/projects?page=projects", key: "projects" },
-    { title: "Contact", link: "/contact?page=contact", key: "contact" },
-  ];
+
 
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [hireMe, setHireMe] = useState<boolean>(false);
