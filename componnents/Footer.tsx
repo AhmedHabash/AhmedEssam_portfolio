@@ -9,9 +9,13 @@ function Footer() {
         <h1 className=" font-bold">Ahmed Essam</h1>
         <h1 className=" font-bold text-sm">© 2026 All rights reserved</h1>
         <div className="flex gap-3">
-          <a href="https:github.com/AhmedHabash" target="_blank">
+          <a
+            href="https://github.com/AhmedHabash"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <FaGithub
-              className=" hover:text-[#4b40e0] transition-colors duration-200 cursor-pointer"
+              className="hover:text-[#4b40e0] transition-colors duration-200 cursor-pointer"
               size={30}
             />
           </a>
