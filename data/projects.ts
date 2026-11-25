@@ -1,5 +1,23 @@
 export const projectsData = [
   {
+    title: "Bekia Platform",
+    des: "A full-stack B2B waste management and recycling platform connecting companies, field collectors, and admins through role-based dashboards. Built with Next.js, Tailwind CSS, Node.js, Express, and MongoDB, featuring JWT authentication, QR-code pickup confirmation, geospatial smart routing with MongoDB $geoNear, photo uploads, admin approval workflows, a points wallet with monthly targets, and a Docker Compose setup.",
+    image: "/Bekia.png",
+    tech: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "JWT",
+      "Docker",
+    ],
+    live: "https://loop-eco.ayman.systems/landing",
+    github: "https://github.com/hamsahusama-25/bekia-website",
+  },
+  {
     title: "Studivo Platform",
     des: "A full-stack student platform that connects students and advisors through a modern dashboard. Built with Next.js, Node.js, Express, MongoDB, and Redis, featuring secure authentication, AI integration, real-time messaging, file uploads, and production-ready deployment using PM2, Nginx, and Docker-ready architecture.",
     image: "/studivo.png",
